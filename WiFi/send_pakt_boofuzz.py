@@ -8,9 +8,10 @@ AP_MAC = 'FC:C2:DE:E4:27:5C'
 STA_MAC = '90:1A:CA:D5:26:10' 
 
 
-
+sock = socket.socket(socket.AF_PACKET, self.proto, socket.htons(ETH_P_ALL))
+sock.bind((self.wifi_iface, ETH_P_ALL))
 #Defininh transport 
-sess = sessions.session(proto = "wifi", repeat_time = 1, timeout = 5.0, sleep_time =0, skip =skip)
+sess = sessions.Session(proto = "wifi", sleep_time =0, skip =0)
 
 #Defining target
 target = session.target(STA_MAC, 0)
@@ -42,4 +43,4 @@ print s_hex_dump(s_render())
 
 sess.connect(s_get("Packets"))
 
-sess.fuzz
+sess.fuzz()
